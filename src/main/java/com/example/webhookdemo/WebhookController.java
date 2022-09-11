@@ -21,15 +21,15 @@ public class WebhookController {
     }
 
     @RequestMapping(value="/webhook",method= RequestMethod.GET)
-    public String web(@RequestParam String name, @RequestParam Long age){
+    public String web(@RequestParam String  hubmode, @RequestParam String  hubchallenge,@RequestParam String hubverifytoken){
 
-        return "welcome to webhook My Name is"+name+".I am "+age+"year's old";
+        return "welcome to webhook "+hubmode+" "+hubchallenge+" "+ hubverifytoken+" ";
     }
-    @RequestMapping(value="/webhook",method= RequestMethod.POST)
-    public String web1(@RequestParam String name,@RequestParam Long age){
-
-        return "welcome to webhook My Name is"+name+".I am "+age+"year's old";
-    }
+//    @RequestMapping(value="/webhook",method= RequestMethod.POST)
+//    public String web1(@RequestParam String  hub.mode, @RequestParam String  hub.challenge,@RequestParam hub.verify_token){
+//
+//        return "welcome to webhook My Name is"+hub.mode+" "+hub.challenge+" "+ hub.verify_token+"";
+//    }
 
 
 }
