@@ -3,12 +3,12 @@ package com.example.webhookdemo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/api/webhook")
-public class WebhookController {
-
+//import org.springframework.web.bind.annotation.*;
+//
+//@RestController
+//@RequestMapping("/api/webhook")
+//public class WebhookController {
+//
 
 
 //    @PostMapping // http://localhost:8080/api/webhook
@@ -46,4 +46,4 @@ public class WebhookController {
 //    }
 
 
-}
+//}
