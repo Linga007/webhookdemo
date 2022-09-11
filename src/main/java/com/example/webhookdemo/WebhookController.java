@@ -22,10 +22,11 @@ public class WebhookController {
 
     @RequestMapping(value="/webhook",method= RequestMethod.GET)
     public String web(
-//            @RequestParam String  hubmode, @RequestParam String  hubchallenge,@RequestParam String hubverify_token
+            @RequestParam String  web
+//            @RequestParam String  hubchallenge,@RequestParam String hubverify_token
             ){
 
-        return "welcome to webhook "+RequestMethod.GET+" ";
+        return "welcome to webhook "+web+" ";
     }
 //    @RequestMapping(value="/webhook",method= RequestMethod.POST)
 //    public String web1(@RequestParam String  hub.mode, @RequestParam String  hub.challenge,@RequestParam hub.verify_token){
