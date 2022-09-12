@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
+
 public class WebhookdemoApplication {
 
 
 
 	public static void main(String[] args) {
-
 		System.out.println("welcome to webhook");
 		SpringApplication.run(WebhookdemoApplication.class, args);
 	}
