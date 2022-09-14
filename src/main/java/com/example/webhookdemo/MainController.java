@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 public class MainController {
-
-
 
     @PostMapping("/webhook")
     public ResponseEntity<String> postjsonObject(@RequestBody String Object){
@@ -20,7 +18,7 @@ public class MainController {
         return new ResponseEntity<String>(Object, HttpStatus.OK);
 
     }
-    @GetMapping("/webhook")
+    @GetMapping("/console")
     public ResponseEntity<String> getjsonObject(@RequestBody String Object) {
         System.out.println("============" + Object);
         return new ResponseEntity<String>(Object, HttpStatus.OK);
