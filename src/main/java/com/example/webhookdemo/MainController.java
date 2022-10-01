@@ -1,20 +1,30 @@
 package com.example.webhookdemo;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +33,24 @@ import java.util.Objects;
 @RestController
 @RequestMapping
 public class MainController {
+    @Value("${secret}")
+    String secret;
 
+
+
+
+//    public ResponseEntity<Object> hub(@RequestBody Object obj) {
+//        Query query=null;
+//        if (
+//                obj.query['hub.mode'] == 'subscribe' &&
+//                        obj.query['hub.verify_token'] == secret
+//        ) {
+//            res.send(obj.query['hub.challenge']);
+//        } else {
+//            res.sendStatus(400);
+//        }
+//        return  Object;
+//    }
 //    @PostMapping("/webhook")
 //    public ResponseEntity<String> postjsonObject(@RequestParam  String object  ){
 //        System.out.println("============"+object);
@@ -31,12 +58,12 @@ public class MainController {
 //
 //    }
 
-    @PostMapping("/webhook")
-    public ResponseEntity<String> postjsonObject(@RequestBody String object){
-        System.out.println("============"+object);
-        return new ResponseEntity<String>(object, HttpStatus.OK);
-
-    }
+//    @PostMapping("/webhook")
+//    public ResponseEntity<String> postjsonObject(@RequestBody String object){
+//        System.out.println("============"+object);
+//        return new ResponseEntity<String>(object, HttpStatus.OK);
+//
+//    }
 //    @Controller
 //    public class TestRequestController {
 //        @RequestMapping(path = "/testrequest", method = RequestMethod.POST)
@@ -79,7 +106,7 @@ public class MainController {
         return query_pairs;
     }
 
-    @PostMapping(path = {"/user"})
+    @PostMapping(path = {"/webhook"})
     public ResponseEntity<Object> userpost(@RequestParam(required=false) Map<String,String> qparams) {
         qparams.forEach((a,b) -> {
                     System.out.println(String.format("%s -> %s", a, b));
@@ -87,14 +114,50 @@ public class MainController {
         return new ResponseEntity<Object>(qparams,HttpStatus.OK);
 
     }
-    @GetMapping(path = {"/user"})
-    public ResponseEntity<Object> userget(@RequestParam(required=false) Map<String,String> qparams) {
-        qparams.forEach((a,b) -> {
-            System.out.println(String.format("%s -> %s", a, b));
-        });
-        return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+
+    @GetMapping(path = {"/webhook"})
+    public ResponseEntity<String> userget(@RequestParam String res) {
+//        String res=null;
+
+        String mode="hub.mode";
+        String challange="hub.challenge";
+        String token="hub.verify_token";
+
+
+
+            if(mode=="subscribe" && token==secret){
+                 res="suess";
+                return ResponseEntity.status(HttpStatus.OK).body(res);
+
+            }else{
+                res="fail";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+
+            }
+
 
     }
+
+//        try {
+//            FileWriter myWriter = new FileWriter("C:\\Users\\91824\\Desktop\\data.txt");
+//            qparams.forEach((a,b)->{
+//            myWriter.write(System.out.println(String.format("%s -> %s", a, b));
+//            }
+//            );
+//
+//            myWriter.close();
+//            if (myWriter.createNewFile()) {
+//                System.out.println("File created: " + myWriter.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+
+
+
+//    }
+
 }
 
 
