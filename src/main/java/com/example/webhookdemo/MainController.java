@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.management.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.BufferedWriter;
@@ -114,26 +115,39 @@ public class MainController {
         return new ResponseEntity<Object>(qparams,HttpStatus.OK);
 
     }
-
     @GetMapping(path = {"/webhook"})
-    public ResponseEntity<String> userget(@RequestParam String res) {
+    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
+        qparams.forEach((a,b) -> {
+            System.out.println(String.format("%s -> %s", a, b));
+        });
+        return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+
+    }
+
+//    @GetMapping(path = {"/webhook"})
+//    public ResponseEntity<Object> userpost(@RequestParam(required=false) Map<String,String> qparams) {
+//        qparams.forEach((a, b) -> {
+//            System.out.println(String.format("%s -> %s", a, b));
+//        });
+//
+//        return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+
+
+//    public ResponseEntity<String> userget(@RequestParam String ) {
 //        String res=null;
-
-        String mode="hub.mode";
-        String challange="hub.challenge";
-        String token="hub.verify_token";
-
-
-
-            if(mode=="subscribe" && token==secret){
-                 res="suess";
-                return ResponseEntity.status(HttpStatus.OK).body(res);
-
-            }else{
-                res="fail";
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
-
-            }
+////        String mode="hub.mode";
+////        String challange="hub.challenge";
+////        String token="hub.verify_token";
+//        if(secret.equals(token)){
+////            if(mode=="subscribe" && token==secret){
+////                challange="condection";
+//                 res="suess";
+//                return ResponseEntity.status(HttpStatus.OK).body(res);
+//            }else{
+//                res="fail";
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+//
+//            }
 
 
     }
@@ -158,7 +172,7 @@ public class MainController {
 
 //    }
 
-}
+
 
 
 
