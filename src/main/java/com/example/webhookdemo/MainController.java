@@ -110,36 +110,36 @@ public class MainController {
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
 
     }
-//    @GetMapping(path = {"/webhook"})
-//    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
-//        Map map = new HashMap<>();
-////        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
-//        if (qparams.containsKey("hub.verify_token")) {
-////           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
-//            if ("hello".equals(qparams.get("hub.verify_token"))) {
-////               qparams.forEach((a,b) -> {
-////                   System.out.println(String.format("%s -> %s", a, b));
-////               });
-////               map.put("hub.challenge",qparams.get("hub.challenge"));
-//                return new ResponseEntity<Object>(qparams, HttpStatus.OK);
-////                  return "hello";
-//            } else {
-//                return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
-//            }
+    @GetMapping(path = {"/webhook"})
+    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
+        Map map = new HashMap<>();
+//        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
+        if (qparams.containsKey("hub.verify_token")) {
+//           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
+            if ("hello".equals(qparams.get("hub.verify_token"))) {
+//               qparams.forEach((a,b) -> {
+//                   System.out.println(String.format("%s -> %s", a, b));
+//               });
+//               map.put("hub.challenge",qparams.get("hub.challenge"));
+                return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+//                  return "hello";
+            } else {
+                return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+            }
+        }
+//                if(qparams.containsKey("hub.challenge"))
+//                    qparams.containsValue();
+
+//            ResponseEntity.status(HttpStatus.OK).body(challange);
+//
+//        }else{
+//            ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
 //        }
-////                if(qparams.containsKey("hub.challenge"))
-////                    qparams.containsValue();
+
+
+        return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
 //
-////            ResponseEntity.status(HttpStatus.OK).body(challange);
-////
-////        }else{
-////            ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
-////        }
-//
-//
-//        return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
-////
-//    }  }
+    }  }
 
 
 //    @GetMapping(path = {"/webhook"})
@@ -190,20 +190,20 @@ public class MainController {
 
 //
 
-    @GetMapping(path = {"/webhook"})
-    public ResponseEntity<String> userget(@RequestParam("hub.mode") String mode,@RequestParam("hub.challenge") String challange,@RequestParam("hub.verify_token") String token) {
-        Object res = null;
-
-        if (token == secret) {
-            if (token == secret) {
-                ResponseEntity.status(HttpStatus.OK).body(challange);
-
-            } else {
-                ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
-            }
-
-        }
-               return new ResponseEntity<String>(token, HttpStatus.BAD_REQUEST);
-
-    }
-}
+//    @GetMapping(path = {"/webhook"})
+//    public ResponseEntity<String> userget(@RequestParam("hub.mode") String mode,@RequestParam("hub.challenge") String challange,@RequestParam("hub.verify_token") String token) {
+//        Object res = null;
+//
+//        if (token == secret) {
+//            if (token == secret) {
+//                ResponseEntity.status(HttpStatus.OK).body(challange);
+//
+//            } else {
+//                ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
+//            }
+//
+//        }
+//               return new ResponseEntity<String>(token, HttpStatus.BAD_REQUEST);
+//
+//    }
+//}
