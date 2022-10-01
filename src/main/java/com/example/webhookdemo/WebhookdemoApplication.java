@@ -29,7 +29,10 @@ public class WebhookdemoApplication {
 //			}
 //			return query_pairs;
 //		}
-		SpringApplication.run(WebhookdemoApplication.class, args);
+
+		 SpringApplication.run(WebhookdemoApplication.class, args);
+		System.out.println("webhook");
+
 	}
 
 }
