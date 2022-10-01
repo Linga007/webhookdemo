@@ -35,8 +35,6 @@ public class MainController {
     String secret;
 
 
-
-
 //    public ResponseEntity<Object> hub(@RequestBody Object obj) {
 //        Query query=null;
 //        if (
@@ -74,15 +72,14 @@ public class MainController {
 //    }
 
 
-
-
     @GetMapping("/console")
     public ResponseEntity<String> getjsonObject(@RequestParam String name) {
         System.out.println("============" + name);
         return new ResponseEntity<String>(name, HttpStatus.OK);
     }
+
     @GetMapping("/console1")
-    public ResponseEntity<Object> getjsonObject(@RequestParam Map<String,String> object) {
+    public ResponseEntity<Object> getjsonObject(@RequestParam Map<String, String> object) {
         System.out.println("============" + object.toString());
         object.keySet();
         object.values();
@@ -92,6 +89,7 @@ public class MainController {
 
 
     }
+
     @RequestMapping(path = "/testrequest", method = RequestMethod.POST)
     public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {
         Map<String, String> query_pairs = new LinkedHashMap<>();
@@ -105,38 +103,44 @@ public class MainController {
     }
 
     @PostMapping(path = {"/webhook"})
-    public ResponseEntity<Object> userpost(@RequestParam(required=false) Map<String,String> qparams) {
-        qparams.forEach((a,b) -> {
-                    System.out.println(String.format("%s -> %s", a, b));
-                });
-        return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+    public ResponseEntity<Object> userpost(@RequestParam(required = false) Map<String, String> qparams) {
+        qparams.forEach((a, b) -> {
+            System.out.println(String.format("%s -> %s", a, b));
+        });
+        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
 
     }
-    @GetMapping(path = {"/webhook"})
-    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
-        Map map=new HashMap<>();
-//        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
-        if(qparams.containsKey("hub.verify_token")){
-//           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
-          if("hello".equals(qparams.get("hub.verify_token"))  )  {
-               qparams.forEach((a,b) -> {
-                   System.out.println(String.format("%s -> %s", a, b));
-               });
-//               map.put("hub.challenge",qparams.get("hub.challenge"));
-              return new ResponseEntity<Object>(qparams,HttpStatus.OK);
-//                  return "hello";
-          }
-//                if(qparams.containsKey("hub.challenge"))
-//                    qparams.containsValue();
+//    @GetMapping(path = {"/webhook"})
+//    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
+//        Map map = new HashMap<>();
+////        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
+//        if (qparams.containsKey("hub.verify_token")) {
+////           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
+//            if ("hello".equals(qparams.get("hub.verify_token"))) {
+////               qparams.forEach((a,b) -> {
+////                   System.out.println(String.format("%s -> %s", a, b));
+////               });
+////               map.put("hub.challenge",qparams.get("hub.challenge"));
+//                return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+////                  return "hello";
+//            } else {
+//                return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+//            }
+//        }
+////                if(qparams.containsKey("hub.challenge"))
+////                    qparams.containsValue();
+//
+////            ResponseEntity.status(HttpStatus.OK).body(challange);
+////
+////        }else{
+////            ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
+////        }
+//
+//
+//        return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+////
+//    }  }
 
-
-
-
-        }
-
-        return new ResponseEntity<Object>("null",HttpStatus.OK);
-
-    }
 
 //    @GetMapping(path = {"/webhook"})
 //    public ResponseEntity<Object> userpost(@RequestParam(required=false) Map<String,String> qparams) {
@@ -164,8 +168,6 @@ public class MainController {
 //            }
 
 
-    }
-
 //        try {
 //            FileWriter myWriter = new FileWriter("C:\\Users\\91824\\Desktop\\data.txt");
 //            qparams.forEach((a,b)->{
@@ -183,13 +185,25 @@ public class MainController {
 //            System.out.println("An error occurred.");
 
 
-
 //    }
-
-
-
 
 
 //
 
+    @GetMapping(path = {"/webhook"})
+    public ResponseEntity<String> userget(@RequestParam("hub.mode") String mode,@RequestParam("hub.challenge") String challange,@RequestParam("hub.verify_token") String token) {
+        Object res = null;
 
+        if (token == secret) {
+            if (token == secret) {
+                ResponseEntity.status(HttpStatus.OK).body(challange);
+
+            } else {
+                ResponseEntity.status(HttpStatus.FORBIDDEN).body(403);
+            }
+
+        }
+               return new ResponseEntity<String>(token, HttpStatus.BAD_REQUEST);
+
+    }
+}
