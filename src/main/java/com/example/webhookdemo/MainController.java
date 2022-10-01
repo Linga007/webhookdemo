@@ -122,8 +122,9 @@ public class MainController {
                qparams.forEach((a,b) -> {
                    System.out.println(String.format("%s -> %s", a, b));
                });
-              return new ResponseEntity<Object>(qparams,HttpStatus.OK);
-
+               map.put("hub.challenge",qparams.get("hub.challenge"));
+              return new ResponseEntity<Object>(map,HttpStatus.OK);
+//                  return "hello";
           }
 //                if(qparams.containsKey("hub.challenge"))
 //                    qparams.containsValue();
