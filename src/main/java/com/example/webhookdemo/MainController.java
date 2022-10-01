@@ -26,10 +26,7 @@ import java.nio.file.Paths;
 //import java.nio.file.Path;
 //import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping
@@ -117,10 +114,26 @@ public class MainController {
     }
     @GetMapping(path = {"/webhook"})
     public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams) {
-        qparams.forEach((a,b) -> {
-            System.out.println(String.format("%s -> %s", a, b));
-        });
-        return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+        Map map=new HashMap<>();
+//        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
+        if(qparams.containsKey("hub.verify_token")){
+//           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
+          if("hello".equals(qparams.get("hub.verify_token"))  )  {
+               qparams.forEach((a,b) -> {
+                   System.out.println(String.format("%s -> %s", a, b));
+               });
+              return new ResponseEntity<Object>(qparams,HttpStatus.OK);
+
+          }
+//                if(qparams.containsKey("hub.challenge"))
+//                    qparams.containsValue();
+
+
+
+
+        }
+
+        return new ResponseEntity<Object>("null",HttpStatus.OK);
 
     }
 
