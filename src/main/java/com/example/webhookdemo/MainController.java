@@ -116,7 +116,8 @@ public class MainController {
 //        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
         if (qparams.containsKey("hub.verify_token")) {
 //           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
-            if ("hello".equals(qparams.get("hub.verify_token"))) {
+            if ("secret".equals(qparams.get("hub.verify_token"))) {
+                secret.equals(qparams.get("hub.verify_token"));
 //               qparams.forEach((a,b) -> {
 //                   System.out.println(String.format("%s -> %s", a, b));
 //               });
