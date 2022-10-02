@@ -73,9 +73,9 @@ public class MainController {
 
 
     @GetMapping("/console")
-    public ResponseEntity<String> getjsonObject(@RequestParam String name) {
-        System.out.println("============" + name);
-        return new ResponseEntity<String>(name, HttpStatus.OK);
+    public ResponseEntity<String> getjsonObject(@RequestParam String hello) {
+        System.out.println("============" + hello);
+        return new ResponseEntity<String>(hello, HttpStatus.OK);
     }
 
     @GetMapping("/console1")
@@ -124,7 +124,7 @@ public class MainController {
                 return new ResponseEntity<Object>(qparams, HttpStatus.OK);
 //                  return "hello";
             } else {
-                return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
             }
         }
 //                if(qparams.containsKey("hub.challenge"))
@@ -137,7 +137,7 @@ public class MainController {
 //        }
 
 
-        return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
 //
     }  }
 
