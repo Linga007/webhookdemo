@@ -163,6 +163,7 @@ public class MainController {
             return new ResponseEntity<Object>(qparams, HttpStatus.OK);
         } else {
 //            console.log(qparams)
+            System.out.println("=============="+qparams);
         }
         return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
     }
