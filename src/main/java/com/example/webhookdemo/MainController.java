@@ -113,35 +113,35 @@ public class MainController {
         return query_pairs;
     }
 
-    @PostMapping(path = {"/webhook"})
-    public ResponseEntity<Object> userpost(@RequestParam(required = false) Map<String, String> qparams) {
-        qparams.forEach((a, b) -> {
-            System.out.println(String.format("%s -> %s", a, b));
-        });
-        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+//    @PostMapping(path = {"/webhook"})
+//    public ResponseEntity<Object> userpost(@RequestParam(required = false) Map<String, String> qparams) {
+//        qparams.forEach((a, b) -> {
+//            System.out.println(String.format("%s -> %s", a, b));
+//        });
+//        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+//
+//    }
 
-    }
-
-    @GetMapping(path = {"/webhook"})
-    public ResponseEntity<Object> getpost(@RequestParam(required = false) Map<String, String> qparams) {
-//        Map map = new HashMap<>();
-        if (qparams.containsKey("hub.mode") && qparams.containsKey("hub.verify_token")) {
-            if (qparams.containsKey("hub.verify_token")) {
-                if ("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))) {
-
-                }
-//            if ("hello".equals(qparams.get("hub.verify_token"))) {
-//                secret.equals(qparams.get("hub.verify_token"));
-//               qparams.forEach((a,b) -> {
-//                   System.out.println(String.format("%s -> %s", a, b));
-//               });
-//               map.put("hub.challenge",qparams.get("hub.challenge"));
-                return new ResponseEntity<Object>(qparams, HttpStatus.OK);
-//                  return "hello";
-            } else {
-                return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
-            }
-        }
+//    @GetMapping(path = {"/webhook"})
+//    public ResponseEntity<Object> getpost(@RequestParam(required = false) Map<String, String> qparams) {
+////        Map map = new HashMap<>();
+//        if (qparams.containsKey("hub.mode") && qparams.containsKey("hub.verify_token")) {
+//            if (qparams.containsKey("hub.verify_token")) {
+//                if ("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))) {
+//
+//                }
+////            if ("hello".equals(qparams.get("hub.verify_token"))) {
+////                secret.equals(qparams.get("hub.verify_token"));
+////               qparams.forEach((a,b) -> {
+////                   System.out.println(String.format("%s -> %s", a, b));
+////               });
+////               map.put("hub.challenge",qparams.get("hub.challenge"));
+//                return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+////                  return "hello";
+//            } else {
+//                return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
+//            }
+//        }
 //                if(qparams.containsKey("hub.challenge"))
 //                    qparams.containsValue();
 
@@ -152,9 +152,9 @@ public class MainController {
 //        }
 
 
-        return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
-//
-    }
+//        return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
+////
+//    }
 
 
     //    @GetMapping(path = {"/testwebhook"})
@@ -192,13 +192,26 @@ public class MainController {
     public ResponseEntity<Object> getpost(@RequestParam(required = false) Map<String, String> qparams, String request) {
 //        Map map = new HashMap<>();
         if (qparams.containsKey("hub.challenge")) {
-
             request = qparams.get("hub.challenge");
             System.out.println(request);
             return new ResponseEntity<Object>(request, HttpStatus.OK);
         } else {
 //            console.log(qparams)
             System.out.println("=============" + qparams);
+        }
+        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+    }
+    @GetMapping(path = {"/authentication"})
+    public ResponseEntity<Object> getauthentication(@RequestParam(required=false) Map<String,String> qparams,String request) {
+//        Map map = new HashMap<>();
+        if (qparams.containsKey("hub.challenge")) {
+
+            request = qparams.get("hub.challenge");
+            System.out.println(request);
+            return new ResponseEntity<Object>(request, HttpStatus.OK);
+        } else {
+//            console.log(qparams)
+            System.out.println("============="+qparams);
         }
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
