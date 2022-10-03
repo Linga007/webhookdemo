@@ -154,7 +154,7 @@ public class MainController {
     }
 
 
-    @GetMapping(path = {"/testwebhook"})
+    @PostMapping(path = {"/testwebhook"})
     public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams,String request) {
 //        Map map = new HashMap<>();
         if (qparams.containsKey("hub.challenge")) {
@@ -175,6 +175,7 @@ public class MainController {
             qparams.containsValue("hub.challenge");
 //            request = qparams.get("hub.challenge");
 //            request.warning(qparams);
+//            String hub
             return new ResponseEntity<Object>(qparams, HttpStatus.OK);
         } else {
 //            console.log(qparams)
