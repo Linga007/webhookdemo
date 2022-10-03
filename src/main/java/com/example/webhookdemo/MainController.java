@@ -73,9 +73,20 @@ public class MainController {
 
 
     @GetMapping("/console")
-    public ResponseEntity<String> getjsonObject(@RequestParam String hello) {
-        System.out.println("============" + hello);
-        return new ResponseEntity<String>(hello, HttpStatus.OK);
+    public ResponseEntity<String> getjsonObject(@RequestParam String secret) {
+        System.out.println("============" + secret);
+
+//           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
+
+                secret.equals(secret);
+//               qparams.forEach((a,b) -> {
+//                   System.out.println(String.format("%s -> %s", a, b));
+//               });
+//               map.put("hub.challenge",qparams.get("hub.challenge"));
+                return new ResponseEntity<String>(secret, HttpStatus.OK);
+//                  return "hello";
+
+
     }
 
     @GetMapping("/console1")
@@ -116,7 +127,7 @@ public class MainController {
 //        if(qparams.containsKey("hub.mode")&& qparams.containsKey("hub.verify_token")){
         if (qparams.containsKey("hub.verify_token")) {
 //           if("subscribe".equals(qparams.get("hub.mode")) && "hello".equals(qparams.get("hub.verify_token"))){
-            if ("secret".equals(qparams.get("hub.verify_token"))) {
+            if ("hello".equals(qparams.get("hub.verify_token"))) {
                 secret.equals(qparams.get("hub.verify_token"));
 //               qparams.forEach((a,b) -> {
 //                   System.out.println(String.format("%s -> %s", a, b));
@@ -140,7 +151,22 @@ public class MainController {
 
         return new ResponseEntity<Object>(qparams, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
 //
-    }  }
+    }
+
+
+    @GetMapping(path = {"/testwebhook"})
+    public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams,String request) {
+//        Map map = new HashMap<>();
+        if (qparams.containsKey("hub.challenge")) {
+            request = qparams.get("hub.challenge");
+//            request.warning(qparams);
+            return new ResponseEntity<Object>(request, HttpStatus.OK);
+        } else {
+//            console.log(qparams)
+        }
+        return new ResponseEntity<Object>(request, HttpStatus.BAD_REQUEST);
+    }
+}
 
 
 //    @GetMapping(path = {"/webhook"})
