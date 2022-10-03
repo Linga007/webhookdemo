@@ -158,7 +158,22 @@ public class MainController {
     public ResponseEntity<Object> getpost(@RequestParam(required=false) Map<String,String> qparams,String request) {
 //        Map map = new HashMap<>();
         if (qparams.containsKey("hub.challenge")) {
+
             request = qparams.get("hub.challenge");
+//            request.warning(qparams);
+            return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+        } else {
+//            console.log(qparams)
+            System.out.println("=============="+qparams);
+        }
+        return new ResponseEntity<Object>(qparams, HttpStatus.BAD_REQUEST);
+    }
+    @GetMapping(path = {"/test1webhook"})
+    public ResponseEntity<Object> gettestpost(@RequestParam(required=false) Map<String,String> qparams) {
+//        Map map = new HashMap<>();
+        if (qparams.containsKey("hub.challenge")) {
+            qparams.containsValue("hub.challenge");
+//            request = qparams.get("hub.challenge");
 //            request.warning(qparams);
             return new ResponseEntity<Object>(qparams, HttpStatus.OK);
         } else {
