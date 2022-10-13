@@ -215,6 +215,20 @@ public class MainController {
         }
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
+    @PostMapping(path = {"/authentication"})
+    public ResponseEntity<Object> postauthentication(@RequestParam(required=false) Map<String,String> qparams,String request) {
+//        Map map = new HashMap<>();
+        if (qparams.containsKey("hub.challenge")) {
+
+            request = qparams.get("hub.challenge");
+            System.out.println(request);
+            return new ResponseEntity<Object>(request, HttpStatus.OK);
+        } else {
+//            console.log(qparams)
+            System.out.println("============="+qparams);
+        }
+        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+    }
 }
 
 
