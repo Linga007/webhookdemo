@@ -54,12 +54,12 @@ public class MainController {
 //
 //    }
 
-//    @PostMapping("/webhook")
-//    public ResponseEntity<String> postjsonObject(@RequestBody String object){
-//        System.out.println("============"+object);
-//        return new ResponseEntity<String>(object, HttpStatus.OK);
+    @PostMapping("/webhook")
+    public ResponseEntity<String> postjsonObject(@RequestBody String object){
+        System.out.println("============"+object);
+        return new ResponseEntity<String>(object, HttpStatus.OK);
 //
-//    }
+    }
 //    @Controller
 //    public class TestRequestController {
 //        @RequestMapping(path = "/testrequest", method = RequestMethod.POST)
@@ -188,19 +188,20 @@ public class MainController {
     }
 
 
-    @GetMapping(path = {"/testingwebhook"})
-    public ResponseEntity<Object> getpost(@RequestParam(required = false) Map<String, String> qparams, String request) {
-//        Map map = new HashMap<>();
-        if (qparams.containsKey("hub.challenge")) {
-            request = qparams.get("hub.challenge");
-            System.out.println(request);
-            return new ResponseEntity<Object>(request, HttpStatus.OK);
-        } else {
-//            console.log(qparams)
-            System.out.println("=============" + qparams);
-        }
-        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
-    }
+//    @GetMapping(path = {"/testingwebhook"})
+//    public ResponseEntity<Object> getpost(@RequestParam Object qparams, String request) {
+////        Map map = new HashMap<>();
+////        if (qparams.containsKey("hub.challenge")) {
+////            request = qparams.get("hub.challenge");
+////            System.out.println(request);
+//            return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+//        }
+////        else {
+////            console.log(qparams)
+////            System.out.println("=============" + qparams);
+//        }
+////        return new ResponseEntity<Object>(qparams, HttpStatus.OK);
+////    }
     @GetMapping(path = {"/authentication"})
     public ResponseEntity<Object> getauthentication(@RequestBody(required=false) Map<String,String> qparams,String request) {
 //        Map map = new HashMap<>();
