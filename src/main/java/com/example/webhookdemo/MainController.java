@@ -1,11 +1,11 @@
 package com.example.webhookdemo;
 
+import com.example.webhookdemo.Controller.TextMsg;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.management.Query;
 import javax.ws.rs.GET;
@@ -230,6 +230,41 @@ public class MainController {
         }
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
+    @PostMapping("/webhook1")
+    public String testHookPost(@RequestBody TextMsg request,
+                               @RequestParam(required = false) Map<String, String> qparams) {
+        String response=null;
+        String token = qparams.get("hub.verify_token");
+        if (request.getObject() != null) {
+
+            if (request.getEntry() != null & request.getEntry().get(0).getChanges() != null
+                    & request.getEntry().get(0).getChanges().get(0).getValue() != null
+                    & request.getEntry().get(0).getChanges().get(0).getMessages().get(0) != null) {
+
+                String phon_no_id = request.getEntry().get(0).getChanges().get(0).getValue().getMetadata()
+                        .getPhone_number_id();
+                String from = request.getEntry().get(0).getChanges().get(0).getMessages().get(0).getFrom();
+                String msg_body = request.getEntry().get(0).getChanges().get(0).getMessages().get(0).getText().getBody();
+
+                System.out.println("phon_no_id: " + phon_no_id + "from: " + from + "msg_body: " + msg_body);
+
+                // set headers
+                RestTemplate restTemplate = new RestTemplate();
+                String url="https://graph.facebook.com/v13.0/"+phon_no_id+"/messages?access_token="+token;
+                HttpHeaders headers = new HttpHeaders();
+                headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+                HttpEntity<TextMsg> entity = new HttpEntity<TextMsg>(request,headers);
+
+                response= restTemplate.exchange(
+                        url, HttpMethod.POST, entity, String.class).getBody();
+
+            }
+
+        }
+        return response;
+
+    }
+
 }
 
 
