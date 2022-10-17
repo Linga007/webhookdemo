@@ -202,7 +202,7 @@ public class MainController {
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
     @GetMapping(path = {"/authentication"})
-    public ResponseEntity<Object> getauthentication(@RequestParam(required=false) Map<String,String> qparams,String request) {
+    public ResponseEntity<Object> getauthentication(@RequestBody(required=false) Map<String,String> qparams,String request) {
 //        Map map = new HashMap<>();
         if (qparams.containsKey("hub.challenge")) {
 
@@ -216,7 +216,7 @@ public class MainController {
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
     @PostMapping(path = {"/authentication"})
-    public ResponseEntity<Object> postauthentication(@RequestParam(required=false) Map<String,String> qparams,String request) {
+    public ResponseEntity<Object> postauthentication(@RequestBody(required=false) Map<String,String> qparams,String request) {
 //        Map map = new HashMap<>();
         if (qparams.containsKey("hub.challenge")) {
 
