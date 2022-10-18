@@ -230,7 +230,7 @@ public class MainController {
         }
         return new ResponseEntity<Object>(qparams, HttpStatus.OK);
     }
-    @PostMapping("/webhook1")
+    @PostMapping(path={"/webhook1"})
     public String testHookPost(@RequestBody TextMsg request,
                                @RequestParam(required = false) Map<String, String> qparams) {
         String response=null;
@@ -247,7 +247,6 @@ public class MainController {
                 String msg_body = request.getEntry().get(0).getChanges().get(0).getMessages().get(0).getText().getBody();
 
                 System.out.println("phon_no_id: " + phon_no_id + "from: " + from + "msg_body: " + msg_body);
-
                 // set headers
                 RestTemplate restTemplate = new RestTemplate();
                 String url="https://graph.facebook.com/v13.0/"+phon_no_id+"/messages?access_token="+token;
